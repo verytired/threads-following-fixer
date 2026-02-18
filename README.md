@@ -1,32 +1,36 @@
-# Threads Following Fixer (Threads表示固定拡張)
+# Threads Following Fixer
 
-ChromeブラウザでThreads（https://www.threads.net/）を開いた際、自動的にタイムラインを「おすすめ（For You）」から「フォロー中（Following）」に切り替える拡張機能です。
+A Chrome extension that automatically switches your Threads feed from "For You" (recommended) to "Following" so that your timeline is always fixed to the people you follow.
 
-## 特徴
-- **自動切り替え**: ページ読み込み完了後、または別ページからトップページ（`/`）に戻った際に、自動的に「フォロー中」タブを選択します。
-- **軽量・高速**: 最短1秒間隔でチェックを行い、DOM操作に必要な最小限のスクリプトのみを実行します。
-- **メニュー操作の自動化**: 「おすすめ」タブが表示されている状態を検知すると、まず「もっと見る」ボタン（またはメニューボタン）をクリックしてメニューを開き、その中から「フォロー中」リンクを選択します。
+## Features
 
-## インストール方法
-この拡張機能は現在のところChromeウェブストアでは公開されていません。以下の手順で手動インストールしてください。
+- **Auto Switch**: Automatically detects when you are on the "For You" feed and switches to the "Following" tab.
+- **Smart Menu Handling**: If the "Following" tab is hidden inside a menu (which is common in the web interface), this extension will automatically click the menu button and select the "Following" option for you.
+- **Lightweight**: Uses minimal resources by checking the page status every second and only executing actions when necessary.
 
-1. このリポジトリをZIP形式でダウンロードし、解凍してください（または `git clone` してください）。
-2. Chromeブラウザのアドレスバーに `chrome://extensions/` と入力して開きます。
-3. 画面右上の **「デベロッパーモード」** をオンにします。
-4. 左上に表示される **「パッケージ化されていない拡張機能を読み込む」** ボタンをクリックします。
-5. 手順1で解凍（またはクローン）した `threads-following-fixer` フォルダを選択します。
+## Installation
 
-## 使い方
-インストール後、Threads（https://www.threads.net/）を開くだけです。
-初回アクセス時やリロード時、または「おすすめ」タブが表示されている場合、自動的に「フォロー中」タブへ遷移します。
+This extension is not yet available on the Chrome Web Store. You can install it manually by following these steps:
 
-## 動作環境
-- Google Chrome（最新版推奨）
-- Threads Web版
+1. Clone this repository or download the ZIP file and extract it.
+   ```bash
+   git clone https://github.com/verytired/threads-following-fixer.git
+   ```
+2. Open Google Chrome and navigate to `chrome://extensions/`.
+3. Enable **"Developer mode"** in the top right corner.
+4. Click the **"Load unpacked"** button in the top left corner.
+5. Select the `threads-following-fixer` folder you just downloaded/cloned.
 
-## 開発者向け情報
-- `content.js`: メインのロジック。定期的にURLとDOMを監視し、必要に応じてクリックイベントを発火させます。
-- `manifest.json`: 拡張機能の設定ファイル（Manifest V3対応）。
+## Usage
 
-## ライセンス
+Simply open [Threads](https://www.threads.net/) in your browser. The extension will automatically work in the background. whenever you visit the home page (`/`), it ensures you are viewing the "Following" feed.
+
+## How it works
+
+The script (`content.js`) monitors the current URL and DOM structure. When it detects that the current feed is set to "For You" (based on the presence of specific links or button states), it simulates user clicks to:
+1. Open the view options menu (if needed).
+2. Click the "Following" link.
+
+## License
+
 MIT License
